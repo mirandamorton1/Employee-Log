@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^2.3.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "employee-log",
+  "description": "Application that allows the user to view their departments, roles, and employees at a glance.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mirandamorton1/Employee-Log.git"
+  },
+  "keywords": [
+    "tracker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mirandamorton1/Employee-Log/issues"
+  },
+  "homepage": "https://github.com/mirandamorton1/Employee-Log#readme"
+}
