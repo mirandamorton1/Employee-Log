@@ -47,5 +47,29 @@ const promptMenu = () => {
         });
 };
 
-const 
+const viewDepartments = () => {
+    connection.query(
+        'SELECT * FROM department;',
+        (err, results) => {
+            console.table(results);
+            promptMenu();
+        });
+};
 
+const viewRoles = () => {
+    connection.query(
+        'SELECT * FROM role;',
+        (err, results) => {
+            console.table(results);
+            promptMenu();
+        });
+};
+
+const viewEmployees = () => {
+    connection.query(
+        'SELECT E.id, E.first_name, R.title, D.name AS department, R.salary, CONCAT(M.first_name, " ", M.last_name) AS manager FROM employee E JOIN role R ON E.role_id = R.id JOIN department D ON R.department_id = D.id LEFT JOIN employee M ON E.manager_id = M.id;',
+        (err, results) => {
+            console.table(results);
+            promptMenu();
+        });
+};
