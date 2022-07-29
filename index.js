@@ -1,7 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const mysql = require('mysql2');
+const db = require("./db");
+const express = require('express');
 require('console.table');
+
+
+const PORT = process.env.PORT || 3001;
+const app = express();
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -58,7 +64,7 @@ const viewDepartments = () => {
 
 const viewRoles = () => {
     connection.query(
-        'SELECT * FROM role;',
+        'SELECT * FROM roles;',
         (err, results) => {
             console.table(results);
             promptMenu();
@@ -67,9 +73,23 @@ const viewRoles = () => {
 
 const viewEmployees = () => {
     connection.query(
-        'SELECT E.id, E.first_name, R.title, D.name AS department, R.salary, CONCAT(M.first_name, " ", M.last_name) AS manager FROM employee E JOIN role R ON E.role_id = R.id JOIN department D ON R.department_id = D.id LEFT JOIN employee M ON E.manager_id = M.id;',
+        'SELECT * FROM employee',
         (err, results) => {
             console.table(results);
             promptMenu();
         });
-};
+}
+const promptAddDepartment = () => {
+    connection.query(
+        'SELECT * FROM employee',
+        (err, results) => {
+            console.table(results);
+            promptMenu();
+        });
+}
+
+promptMenu();
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
