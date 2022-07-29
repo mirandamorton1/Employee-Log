@@ -54,39 +54,47 @@ const promptMenu = () => {
 };
 
 const viewDepartments = () => {
-    connection.query(
-        'SELECT * FROM department;',
-        (err, results) => {
-            console.table(results);
-            promptMenu();
-        });
-};
+    db.findDepartments()
+        .then(([results]) => {let departments=results;
+            console.table(departments);
+        })
+        .then(() => promptMenu())
+    };
 
 const viewRoles = () => {
-    connection.query(
-        'SELECT * FROM roles;',
-        (err, results) => {
-            console.table(results);
-            promptMenu();
-        });
-};
+    db.findRoles()
+    .then(([results]) => {let roles=results;
+        console.table(roles);
+    })
+    .then(() => promptMenu())
+}   ;
 
 const viewEmployees = () => {
-    connection.query(
-        'SELECT * FROM employee',
-        (err, results) => {
-            console.table(results);
-            promptMenu();
-        });
-}
+    db.findEmployees()
+        .then(([results]) => { let employees=results;
+            console.table(employees);
+        })
+        .then(() => promptMenu())
+    };
+
 const promptAddDepartment = () => {
-    connection.query(
-        'SELECT * FROM employee',
-        (err, results) => {
-            console.table(results);
-            promptMenu();
-        });
-}
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What department would you like to add?'
+        }])
+        .then(([answers]) => {let addDepartment=answers;
+            console.table(addDepartment);
+        })
+        .then(() => promptMenu())
+    };
+    // db.addepartment()
+    //     .then(([results]) => {let departments=results;
+    //         console.table(departments);
+    //     })
+    //     .then(() => promptMenu())
+
 
 promptMenu();
 

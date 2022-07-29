@@ -1,16 +1,42 @@
-// const connection = require("./connection");
+const connection = require("./connection");
 
-// class DB {
-//     constructor(connection) {
-//         this.connection = connection;
-//     }
+class DB {
+    constructor(connection) {
+        this.connection = connection;
+    }
 
-//     findEmployees() {     
-//         return this.connection.promise().query(
-//             "SELECT * FROM EMPLOYEE"
+    findDepartments() {     
+        return this.connection.promise().query(
+            "SELECT * FROM department"
 
-//        );
-//     }
-// }
+       );
+    }
 
-//     module.exports = new DB(connection);
+    findRoles() {     
+        return this.connection.promise().query(
+            "SELECT * FROM roles"
+
+       );
+    }
+    
+    findEmployees() {     
+        return this.connection.promise().query(
+            "SELECT * FROM EMPLOYEE"
+
+       );
+    }
+
+    addDepartment () {
+        
+    }
+}
+
+    module.exports = new DB(connection);
+
+    // const viewEmployees = () => {
+    //     connection.query(
+    //         'SELECT * FROM employee',
+    //         (err, results) => {
+    //             console.table(results);
+    //             promptMenu();
+    //         });
