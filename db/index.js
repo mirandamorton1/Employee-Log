@@ -27,6 +27,18 @@ class DB {
     }
 
     addDepartment () {
+
+    }
+
+    addRole () {
+        
+    }
+
+    addEmployee () {
+        
+    }
+
+    updateRole () {
         
     }
 }

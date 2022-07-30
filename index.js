@@ -3,6 +3,7 @@ const fs = require('fs');
 const mysql = require('mysql2');
 const db = require("./db");
 const express = require('express');
+const QueryString = require('qs');
 require('console.table');
 
 
@@ -77,18 +78,91 @@ const viewEmployees = () => {
         .then(() => promptMenu())
     };
 
-const promptAddDepartment = () => {
-    return inquirer.prompt([
+function promptAddDepartment () {
+    inquirer.prompt([
         {
             type: 'input',
             name: 'name',
             message: 'What department would you like to add?'
         }])
-        .then(([answers]) => {let addDepartment=answers;
-            console.table(addDepartment);
+        .then(function(answer) {
+            console.log(answer);
+            connection.query("INSERT INTO department SET?", {
+                name:answer.name   
+            }, function(error) {
+                if (error) throw error;
+                console.log("added department");
+                
+            })
         })
-        .then(() => promptMenu())
+
     };
+
+// function promptAddRole () {
+//     inquirer.prompt([
+//         {
+//             type: 'input',
+//             name: 'name',
+//             message: 'What role would you like to add?'
+//         }])
+//         .then(function(answer) {
+//             console.log(answer);
+//             connection.query("INSERT INTO roles SET?", {
+//             name:answer.name  
+//             }, function(error) {
+//                 if (error) throw error;
+//                 console.log("added role");
+                    
+//             })
+//         })
+    
+//     }; 
+    
+// function promptAddEmployee () {
+//     inquirer.prompt([
+//         {
+//             type: 'input',
+//             name: 'name',
+//             message: 'What is the employees name?'
+//         }])
+//         .then(function(answer) {
+//             console.log(answer);
+//             connection.query("INSERT INTO employee SET?", {
+//             name:answer.name   
+//             }, function(error) {
+//                 if (error) throw error;
+//                 console.log("added employee");
+                        
+//             })
+//         })
+        
+//     }; 
+
+// function promptUpdateRole () {
+//     inquirer.prompt([
+//         {
+//             type: 'input',
+//             name: 'name',
+//             message: 'What role would you like to update?'
+//         }])
+//         .then(function(answer) {
+//             console.log(answer);
+//             connection.query("INSERT INTO roles SET?", {
+//                 name:answer.name  
+//             }, function(error) {
+//                 if (error) throw error;
+//                 console.log("updated role");
+                            
+//             })
+//         })
+            
+//     }; 
+        
+        // .then(([answers]) => {let addDepartment=answers;
+        //     console.table(addDepartment);
+        // })
+        // .then(() => promptMenu())
+    
     // db.addepartment()
     //     .then(([results]) => {let departments=results;
     //         console.table(departments);
