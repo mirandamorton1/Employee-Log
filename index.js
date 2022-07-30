@@ -94,69 +94,74 @@ function promptAddDepartment () {
                 console.log("added department");
                 
             })
+            promptMenu();
         })
 
     };
 
-// function promptAddRole () {
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'name',
-//             message: 'What role would you like to add?'
-//         }])
-//         .then(function(answer) {
-//             console.log(answer);
-//             connection.query("INSERT INTO roles SET?", {
-//             name:answer.name  
-//             }, function(error) {
-//                 if (error) throw error;
-//                 console.log("added role");
+function promptAddRole () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What role would you like to add?'
+        }])
+        .then(function(answer) {
+            console.log(answer);
+            connection.query("INSERT INTO roles SET?", {
+            title:answer.title  
+            }, function(error) {
+                if (error) throw error;
+                console.log("added role");
                     
-//             })
-//         })
+            })
+            promptMenu();
+        })
     
-//     }; 
+    }; 
     
-// function promptAddEmployee () {
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'name',
-//             message: 'What is the employees name?'
-//         }])
-//         .then(function(answer) {
-//             console.log(answer);
-//             connection.query("INSERT INTO employee SET?", {
-//             name:answer.name   
-//             }, function(error) {
-//                 if (error) throw error;
-//                 console.log("added employee");
+function promptAddEmployee () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is the employees name?'
+        }])
+        .then(function(answer) {
+            console.log(answer);
+            connection.query("INSERT INTO employee SET?", {
+            name:answer.name   
+            }, function(error) {
+                if (error) throw error;
+                console.log("added employee");
                         
-//             })
-//         })
+            })
+            promptMenu();
+        })
         
-//     }; 
+    }; 
 
-// function promptUpdateRole () {
-//     inquirer.prompt([
-//         {
-//             type: 'input',
-//             name: 'name',
-//             message: 'What role would you like to update?'
-//         }])
-//         .then(function(answer) {
-//             console.log(answer);
-//             connection.query("INSERT INTO roles SET?", {
-//                 name:answer.name  
-//             }, function(error) {
-//                 if (error) throw error;
-//                 console.log("updated role");
+function promptUpdateRole () {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What role would you like to update?'
+        }])
+        .then(function(answer) {
+            console.log(answer);
+            connection.query("INSERT INTO roles SET?", {
+                name:answer.name  
+            }, function(error) {
+                if (error) throw error;
+                console.log("updated role");
                             
-//             })
-//         })
+            })
+            promptMenu();
+
+        })
             
-//     }; 
+    }; 
         
         // .then(([answers]) => {let addDepartment=answers;
         //     console.table(addDepartment);
