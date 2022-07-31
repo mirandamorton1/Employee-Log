@@ -2,8 +2,10 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const mysql = require('mysql2');
 const db = require("./db");
+const pic = require("asciiart-logo");
 const express = require('express');
 const QueryString = require('qs');
+const { title } = require('process');
 require('console.table');
 
 
@@ -16,6 +18,8 @@ var connection = mysql.createConnection({
     password: 'rootroot',
     database: 'employee_tracker'
 })
+ const logo = pic({name: "Employee manager"}).render();
+ console.log(logo);
 
 const promptMenu = () => {
     return inquirer.prompt([
@@ -105,11 +109,22 @@ function promptAddRole () {
             type: 'input',
             name: 'title',
             message: 'What role would you like to add?'
-        }])
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'What is the salary of this new role?'
+        },
+        {
+            type: 'input',
+            name: 'depo',
+            message: 'What department is this new role in?'
+        }
+    ])
         .then(function(answer) {
             console.log(answer);
             connection.query("INSERT INTO roles SET?", {
-            title:answer.title  
+            title: answer.title, salary: answer.salary, department_id: answer.depo
             }, function(error) {
                 if (error) throw error;
                 console.log("added role");
@@ -124,13 +139,29 @@ function promptAddEmployee () {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'name',
-            message: 'What is the employees name?'
-        }])
+            name: 'first',
+            message: 'What is the employees first name?'
+        },
+        {
+            type: 'input',
+            name: 'last',
+            message: 'What is the employees last name?'
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is the employees role id?'
+        },
+        {
+            type: 'input',
+            name: 'manager',
+            message: 'What is the employees manager id?'
+        }
+    ])
         .then(function(answer) {
             console.log(answer);
             connection.query("INSERT INTO employee SET?", {
-            name:answer.name   
+            first: answer.first, last: answer.last, id: answer.id, manager: answer.manager  
             }, function(error) {
                 if (error) throw error;
                 console.log("added employee");
@@ -145,13 +176,18 @@ function promptUpdateRole () {
     inquirer.prompt([
         {
             type: 'input',
-            name: 'name',
-            message: 'What role would you like to update?'
+            name: 'id',
+            message: 'Which employee role is getting updated?'
+        },
+        {
+            type: 'input',
+            name: 'title',
+            message: 'What is the new role?'
         }])
         .then(function(answer) {
             console.log(answer);
             connection.query("INSERT INTO roles SET?", {
-                name:answer.name  
+                id: answer.id, title: answer.title
             }, function(error) {
                 if (error) throw error;
                 console.log("updated role");
