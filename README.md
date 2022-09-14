@@ -33,9 +33,9 @@ Application that allows the user to view their departments, roles, and employees
   To test this app, open the file in VS Code, open the terminal and run `node index.js`. Answer the questions and exit after to see if the answers were rendered correctly. 
   ### Technology Used:
   - JavaScript
-  inquirer.js
-  Node.js
-  MySQL
+  - inquirer.js
+  - Node.js
+  - MySQL
   ### Contributors: 
   To contribute to this project, clone this repo locally and commit your code on a separate branch. 
   #### Contributors:
